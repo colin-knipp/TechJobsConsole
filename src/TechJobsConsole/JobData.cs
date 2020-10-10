@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -49,7 +51,8 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (string.Equals(aValue, value, StringComparison.CurrentCultureIgnoreCase))
+                   // (aValue.Contains(value))
                 {
                     jobs.Add(row);
                 }
@@ -58,10 +61,40 @@ namespace TechJobsConsole
             return jobs;
         }
 
-        /*
-         * Load and parse data from job_data.csv
-         */
-        private static void LoadData()
+        // FindByValue: search all jobs for a string
+        public static List<Dictionary<string, string>> FindByValue(string column, string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> row in job)
+                {
+                    if (string.Equals(row.Value, value, StringComparison.CurrentCultureIgnoreCase))
+                        // (row.Value.Contains(value))
+                    {
+
+                        jobs.Add(job);
+                            break;
+                    }
+                        
+                }
+                    
+            }
+                
+        
+           Console.WriteLine(value);
+           return jobs;
+        }
+            /*
+             * Load and parse data from job_data.csv
+             */
+            private static void LoadData()
         {
 
             if (IsDataLoaded)
