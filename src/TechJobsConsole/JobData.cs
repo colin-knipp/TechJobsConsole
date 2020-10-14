@@ -75,8 +75,7 @@ namespace TechJobsConsole
             {
                 foreach (KeyValuePair<string, string> row in job)
                 {
-                    if (string.Equals(row.Value, value, StringComparison.CurrentCultureIgnoreCase))
-                        // (row.Value.Contains(value))
+                    if (row.Value.ToLower().Contains(value.ToLower()))
                     {
 
                         jobs.Add(job);
@@ -88,7 +87,7 @@ namespace TechJobsConsole
             }
                 
         
-           Console.WriteLine(value);
+          
            return jobs;
         }
             /*

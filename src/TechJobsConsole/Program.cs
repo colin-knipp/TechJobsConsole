@@ -68,12 +68,23 @@ namespace TechJobsConsole
                     if (columnChoice.Equals("all"))
                     {
                         searchResults = JobData.FindByValue(columnChoice, searchTerm);
-                        PrintJobs(searchResults);
+                        
+                        if (searchResults.Count > 0)
+                            
+                        {
+                            PrintJobs(searchResults);
+                        } 
+                        else { Console.WriteLine("No Results.");}
                     }
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
-                        PrintJobs(searchResults);
+                        
+                        if (searchResults.Count > 0)
+                        {
+                            PrintJobs(searchResults);
+                        }
+                        else { Console.WriteLine("No Results.");}
                     }
                 }
             }
